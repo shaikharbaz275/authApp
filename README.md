@@ -16,5 +16,8 @@ Follow these instructions to get the project up and running.
 ### Clone the Repository
 
 ```sh
-git clone git@github.com-work_user1:shaikharbaz275/authApp.git
+git clone git@github.com:shaikharbaz275/authApp.git
 cd authApp
+
+### Build and Run the Containers
+docker-compose up --build
