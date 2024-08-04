@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - DB_HOST=mysql
+      - DB_USER=Admin
+      - DB_PASSWORD=Admin@1234
+      - DB_NAME=auth_app
+      - SESSION_SECRET=22f2a2e2dc041578d314fecf6850e81e751fc32b54ad52aafa623f64087e6b092e8003a75a11e2b3de1e98c645ec2d3230f619f630a7ecd1f65e938804b37ecf
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+      - mysql
+    # entrypoint: ["./wait-for-it.sh", "mysql:3306", "--", "npm", "dev"]
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin@1234
+      MYSQL_DATABASE: auth_app
+      MYSQL_USER: Admin
+      MYSQL_PASSWORD: Admin@1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d # Mount the sql directory
+    restart: always
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+volumes:
+    mysql-data:
+
