@@ -1,7 +1,7 @@
 // authController.js
 
 const bcrypt = require('bcryptjs');
-const User = require('../models/user'); // Adjust path as needed
+const User = require('../models/user'); 
 
 // Registration logic
 exports.register = async (req, res) => {

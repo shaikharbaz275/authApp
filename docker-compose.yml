@@ -14,7 +14,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
       - SESSION_SECRET=${SESSION_SECRET}
-      - REDIS_HOST={$REDIS_HOST}
+      - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
     depends_on:
       - redis
@@ -26,10 +26,10 @@ services:
   mysql:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: Admin@1234
-      MYSQL_DATABASE: auth_app
-      MYSQL_USER: Admin
-      MYSQL_PASSWORD: Admin@1234
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
