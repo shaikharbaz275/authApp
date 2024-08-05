@@ -21,3 +21,5 @@ cd authApp
 
 ### Build and Run the Containers
 docker-compose up --build
+
+Hit URL : http://localhost:3000/login
